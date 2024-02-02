@@ -18,6 +18,8 @@ Router.get("/r/:category",async(req,res)=>{
     try {
         const {category} = req.params;
         const particularFood = await FoodModel.find({
+            //regex to check for the substring
+            //options to define the text is case insensitive
             category: {$regex: category, $options: "i"}
         })
         return res.json({particularFood});
@@ -25,3 +27,6 @@ Router.get("/r/:category",async(req,res)=>{
         return res.status(500).json({error: error.message});
     }
 })
+
+
+export default Router;
